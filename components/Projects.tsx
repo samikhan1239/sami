@@ -27,7 +27,7 @@ interface Project {
   github: string;
   live: string;
   featured: boolean;
-  category: string;
+  categories: string[]; // Changed from 'category' to 'categories' as an array
   type: string;
   duration: string;
   team: string;
@@ -45,13 +45,49 @@ interface ProjectsProps {
   setActiveFilter: (filter: string) => void;
 }
 
-export default function Projects({ projects, categories, activeFilter, setActiveFilter }: ProjectsProps) {
-  // Memoized filtered projects
-  const filteredProjects = useMemo(
-    () =>
-      activeFilter === "all" ? projects : projects.filter((project) => project.category === activeFilter),
-    [projects, activeFilter]
-  );
+export default function Projects({ projects, activeFilter, setActiveFilter }: ProjectsProps) {
+  // Memoized filtered projects based on custom filtering logic
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === "All") {
+      return projects;
+    } else if (activeFilter === "Full Stack") {
+      // Full Stack projects, excluding those that are only Animated or Frontend
+      return projects.filter(
+        (project) =>
+          project.categories.includes("Full Stack") &&
+          !project.categories.every((cat) => cat === "Animated" || cat === "Frontend")
+      );
+    } else if (activeFilter === "Real World") {
+      // Only specific Real World projects: Warsi Homeopathic Clinic, Love Sync, My Tiffin Hub
+      const allowedTitles = ["Warsi Homeopathic Clinic", "Love Sync", "My Tiffin Hub"];
+      return projects.filter((project) => allowedTitles.includes(project.title));
+    } else if (activeFilter === "Machine Learning") {
+      // Only Stay Finder for Machine Learning
+      return projects.filter((project) => project.title === "Stay Finder");
+    } else if (activeFilter === "Frontend") {
+      // Frontend projects, including Freelancer Website and Animated projects
+      return projects.filter(
+        (project) =>
+          project.categories.includes("Frontend") ||
+          project.categories.includes("Animated") ||
+          project.title === "Freelancer Website"
+      );
+    } else if (activeFilter === "Animated") {
+      // Animated projects, including Freelancer Website
+      return projects.filter(
+        (project) =>
+          project.categories.includes("Animated") || project.title === "Freelancer Website"
+      );
+    }
+    // Default case: filter by exact category match
+    return projects.filter((project) => project.categories.includes(activeFilter));
+  }, [projects, activeFilter]);
+
+  // Define project categories
+  const projectCategories = ["All", "Full Stack", "Real World", "Machine Learning", "Frontend", "Animated"];
+
+  // Updated project data with categories as an array
+ 
 
   return (
     <section
@@ -80,7 +116,7 @@ export default function Projects({ projects, categories, activeFilter, setActive
 
         {/* Project Filter Tabs */}
         <div className="flex flex-wrap justify-center gap-4 mb-16" role="tablist" aria-label="Project Categories">
-          {categories.map((category) => (
+          {projectCategories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveFilter(category)}
@@ -99,7 +135,7 @@ export default function Projects({ projects, categories, activeFilter, setActive
                   : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white"
               }`}
             >
-              {category === "all" ? "All Projects" : category}
+              {category}
             </button>
           ))}
         </div>
@@ -122,14 +158,14 @@ export default function Projects({ projects, categories, activeFilter, setActive
                   className={`relative group ${index % 2 === 1 ? "lg:col-start-2" : ""}`}
                   style={{ animationDelay: `${index * 0.2}s` }}
                 >
-                  <div className="relative overflow-hidden rounded-3xl shadow-2xl">
-                    <Image
-                      src={project.image || "/placeholder.svg?height=400&width=600"}
-                      alt={project.title}
-                      width={600}
-                      height={400}
-                      className="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
+                  <div className="relative rounded-3xl shadow-2xl">
+                     <Image
+    src={project.image || "/placeholder.svg?height=400&width=600"}
+    alt={project.title}
+    width={600}
+    height={400}
+    className="w-full h-90 object-contain transition-transform duration-700"
+  />
 
                     {/* Gradient Overlay */}
                     <div
@@ -147,7 +183,7 @@ export default function Projects({ projects, categories, activeFilter, setActive
                       <Badge
                         className={`bg-gradient-to-r ${project.color} bg-opacity-20 text-white border border-white/30`}
                       >
-                        {project.category}
+                        {project.categories[0]} {/* Display primary category */}
                       </Badge>
                     </div>
 
@@ -212,7 +248,7 @@ export default function Projects({ projects, categories, activeFilter, setActive
                       <div
                         className={`w-3 h-3 bg-gradient-to-r ${project.color} rounded-full animate-pulse`}
                       ></div>
-                      <span className="text-gray-400 font-medium">{project.category} Project</span>
+                      <span className="text-gray-400 font-medium">{project.categories[0]} Project</span>
                     </div>
 
                     <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">{project.title}</h3>

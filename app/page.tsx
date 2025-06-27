@@ -78,11 +78,10 @@ export default function Portfolio() {
   const [typedText, setTypedText] = useState("");
   const [currentCodeLine, setCurrentCodeLine] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [particles, setParticles] = useState<Particle[]>([]); // Particles managed for canvas rendering
+  const [particles, setParticles] = useState<Particle[]>([]);
   const [isMousePressed, setIsMousePressed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [activeProjectFilter, setActiveProjectFilter] = useState("all");
+  const [activeProjectFilter, setActiveProjectFilter] = useState("All"); // Capitalized to match Projects component
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particleCanvasRef = useRef<HTMLCanvasElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
@@ -95,9 +94,9 @@ export default function Portfolio() {
   const codeLines = useMemo(
     () => [
       "const developer = {",
-      "  name: 'Elite Code Master',",
+      "  name: 'Sami Khan',",
       "  level: 'Legendary',",
-      "  skills: ['React', 'Node.js', 'AI/ML', '3D Graphics'],",
+      "  skills: ['React', 'Node.js', 'AI/ML', 'Next.js'],",
       "  passion: 'Creating Digital Universes',",
       "  status: 'Ready to Revolutionize'",
       "};",
@@ -110,9 +109,9 @@ export default function Portfolio() {
       "Full Stack Architect",
       "AI/ML Specialist",
       "3D Graphics Expert",
-      "Cloud Engineer",
       "Tech Innovator",
       "Digital Creator",
+       "Open Source Contributor"
     ],
     []
   );
@@ -145,7 +144,7 @@ export default function Portfolio() {
         { name: "Supabase", level: 80, experience: "2+ years", projects: 15, icon: Database, color: "from-green-400 to-green-600" },
       ],
       devops: [
-        { name: "Docker", level: 88, experience: "3+ years", projects: 30, icon: Settings, color: "from-blue-400 to-blue-600" },
+        { name: "Docker", level: 88, experience: "3+ years", projects:  30, icon: Settings, color: "from-blue-400 to-blue-600" },
         { name: "AWS", level: 85, experience: "3+ years", projects: 25, icon: Cloud, color: "from-orange-400 to-orange-600" },
         { name: "Vercel", level: 92, experience: "4+ years", projects: 40, icon: Globe, color: "from-gray-400 to-gray-600" },
         { name: "Git", level: 95, experience: "5+ years", projects: 50, icon: GitBranch, color: "from-orange-500 to-orange-700" },
@@ -166,8 +165,6 @@ export default function Portfolio() {
     }),
     []
   );
-
-  
 
   const animateProgressBar = useCallback(
     (skillName: string, targetLevel: number) => {
@@ -225,7 +222,7 @@ export default function Portfolio() {
       ctx.font = `${fontSize}px arial`;
 
       for (let i = 0; i < drops.length; i++) {
-        const text = matrix[Math.floor(Math.random() * matrix.length)];
+        const text = matrix[Math.random() * matrix.length | 0];
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
@@ -248,7 +245,7 @@ export default function Portfolio() {
       vx: (Math.random() - 0.5) * 4,
       vy: (Math.random() - 0.5) * 4,
       size: Math.random() * 4 + 2,
-      color: colors[Math.floor(Math.random() * colors.length)],
+      color: colors[Math.random() * colors.length | 0],
       life: 1,
     };
   }, []);
@@ -302,7 +299,7 @@ export default function Portfolio() {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [updateParticles]);
+  }, [updateParticles , particles, setParticles]);
 
   // Mouse tracking and interaction
   useEffect(() => {
@@ -464,181 +461,270 @@ export default function Portfolio() {
   ];
 
   // Projects data
-  const projects = [
+  const projects = useMemo(
+  () => [
     {
       id: 1,
-      title: "AI-Powered E-Commerce Platform",
-      description: "Revolutionary e-commerce platform with AI-driven recommendations and real-time analytics",
-      image: "/placeholder.svg?height=400&width=600",
-      tech: ["Next.js", "Node.js", "MongoDB", "TensorFlow.js", "Stripe", "AWS"],
-      github: "#",
-      live: "#",
+      title: "Freelancer Website",
+      description: "A real-world, full-stack animated platform for freelance services, connecting clients and professionals with ML-driven project recommendations and secure payments.",
+      image: "/free.png",
+      tech: ["Next.js", "PostgreSQL", "Node.js", "Tailwind CSS", "Prisma", "WebSocket", "Nodemailer", "Stripe", "TensorFlow"],
+      github: "https://github.com/samikhan1239/freelancer-website",
+      live: "https://freelancer-samikhan.vercel.app/",
       featured: true,
-      category: "Full Stack",
-      type: "web",
-      duration: "6 months",
-      team: "Solo Project",
+      categories: ["Frontend", "Animated", "Real World"], // Updated to categories
+      type: "Real World, Full Stack, Frontend, Animated",
+      duration: "Jun 2025 - Sep 2025",
+      team: "Solo",
       stats: {
-        users: "10K+",
-        performance: "99.9%",
-        rating: "4.9/5",
-        revenue: "$500K+",
-        conversion: "15.2%",
+        users: "150+ Daily",
+        uptime: "99%",
+        projects: "100+ Monthly",
       },
       highlights: [
-        "AI recommendation engine increased sales by 40%",
-        "Real-time inventory sync across multiple channels",
-        "Advanced analytics dashboard with 50+ metrics",
-        "Mobile-first responsive design",
+        "Developed animated client dashboard with ML-driven project recommendations.",
+        "Implemented secure payment processing with Stripe, enhancing transaction security by 15%.",
+        "Created admin panel with JWT authentication and WebSocket for real-time updates.",
       ],
-      color: "from-purple-500 to-pink-500",
+      color: "from-green-500 to-emerald-500",
     },
     {
       id: 2,
-      title: "Blockchain Voting System",
-      description: "Decentralized voting platform with smart contracts and cryptographic security",
-      image: "/placeholder.svg?height=400&width=600",
-      tech: ["React", "Solidity", "Web3.js", "IPFS", "Ethereum", "Node.js"],
-      github: "#",
-      live: "#",
+      title: "Stay Finder",
+      description: "A real-world, full-stack Airbnb clone with modern itinerary planning and ML-optimized search, featuring animated UI and secure payment processing.",
+      image: "/stayFinder.png",
+      tech: ["Next.js", "MongoDB", "Node.js", "Tailwind CSS", "Vite", "Docker", "Scikit-learn"],
+      github: "https://github.com/samikhan1239/stay-finder",
+      live: "https://heavenspace.onrender.com",
       featured: true,
-      category: "Blockchain",
-      type: "web",
-      duration: "8 months",
-      team: "3 Developers",
+      categories: ["Machine Learning", "Full Stack", "Real World", "Animated"],
+      type: "Real World, Full Stack, Frontend, Animated",
+      duration: "Apr 2025 - Aug 2025",
+      team: "Solo",
       stats: {
-        transactions: "50K+",
-        security: "100%",
-        uptime: "99.99%",
-        voters: "25K+",
-        elections: "150+",
+        listings: "50+ Daily",
+        uptime: "99%",
+        retrieval: "25% Faster",
       },
       highlights: [
-        "Zero security breaches in 2+ years",
-        "Transparent and immutable vote counting",
-        "Support for multiple election types",
-        "Real-time results with verification",
+        "Built ML-optimized searchable listings with itinerary planning, improving access by 20%.",
+        "Developed admin/superadmin panels with JWT authentication for secure management.",
+        "Optimized data retrieval by 25% using MongoDB and Docker.",
       ],
       color: "from-blue-500 to-cyan-500",
     },
     {
       id: 3,
-      title: "Real-time Collaboration Platform",
-      description: "Advanced collaboration platform with live editing and AI-powered insights",
-      image: "/placeholder.svg?height=400&width=600",
-      tech: ["React", "Socket.io", "Node.js", "MongoDB", "WebRTC", "Docker"],
-      github: "#",
-      live: "#",
-      featured: true,
-      category: "Real-time",
-      type: "web",
-      duration: "10 months",
-      team: "5 Developers",
+      title: "Warsi Homeopathic Clinic",
+      description: "A real-world, full-stack platform for appointment booking and e-learning, with animated interfaces and ML-enhanced course recommendations for 200+ patients and students.",
+      image: "/clinic.png",
+      tech: ["Next.js", "PostgreSQL", "Neon", "Node.js", "Tailwind CSS", "Prisma", "Cloudinary", "TensorFlow"],
+      github: "https://github.com/samikhan1239/warsi-homeo-clinic",
+      live: "https://warsi-homeo-clinicmroc.vercel.app",
+      featured: false,
+      categories: ["Real World", "Full Stack", "Animated"],
+      type: "Real World, Full Stack, Frontend, Animated",
+      duration: "Jan 2025 - Mar 2025",
+      team: "Solo",
       stats: {
-        users: "25K+",
-        latency: "<50ms",
-        satisfaction: "98%",
-        documents: "100K+",
-        meetings: "50K+",
+        patients: "200+",
+        uptime: "99%",
+        requests: "100+ Daily",
       },
       highlights: [
-        "Real-time collaborative editing",
-        "HD video conferencing",
-        "AI-powered project insights",
-        "Advanced permission management",
+        "Reduced booking time by 30% with admin panel for appointment approvals.",
+        "Increased student engagement by 25% with ML-driven course recommendations.",
+        "Ensured 99% uptime with RESTful APIs and Cloudinary integration.",
       ],
-      color: "from-green-500 to-emerald-500",
+      color: "from-teal-500 to-green-500",
     },
     {
       id: 4,
-      title: "Healthcare Management System",
-      description: "Comprehensive healthcare platform with AI diagnostics and telemedicine",
-      image: "/placeholder.svg?height=400&width=600",
-      tech: ["Next.js", "Python", "PostgreSQL", "TensorFlow", "AWS", "Docker"],
-      github: "#",
-      live: "#",
+      title: "Love Sync",
+      description: "A real-world, full-stack matrimonial website with admin-approved profiles and mutual connection features, ensuring privacy with ML-enhanced matching.",
+      image: "/love.png",
+      tech: ["Next.js", "PostgreSQL", "Neon", "Node.js", "Tailwind CSS", "Prisma", "TensorFlow"],
+      github: "https://github.com/samikhan1239/love-sync",
+      live: "https://love-sync-kappa.vercel.app/",
       featured: false,
-      category: "Healthcare",
-      type: "web",
-      duration: "12 months",
-      team: "8 Developers",
+      categories: ["Real World", "Full Stack", "Animated"],
+      type: "Real World, Full Stack, Frontend, Animated",
+      duration: "Dec 2024 - Feb 2025",
+      team: "Solo",
       stats: {
-        patients: "50K+",
-        accuracy: "96%",
-        appointments: "200K+",
-        hospitals: "25+",
-        doctors: "500+",
+        matches: "50+ Daily",
+        uptime: "99%",
+        requests: "200+ Daily",
       },
       highlights: [
-        "AI-driven diagnostics with 96% accuracy",
-        "Integrated telemedicine for 200K+ appointments",
-        "Scalable infrastructure for 25+ hospitals",
-        "Secure patient data management",
+        "Enhanced privacy by 20% with ML-driven admin-approved profile matching and mutual consent.",
+        "Implemented secure RESTful APIs with JWT authentication.",
+        "Achieved 99% uptime for 200+ daily API requests.",
       ],
-      color: "from-red-500 to-orange-500",
+      color: "from-purple-500 to-pink-500",
     },
     {
       id: 5,
-      title: "Smart City IoT Dashboard",
-      description: "IoT-powered smart city management with predictive analytics",
-      image: "/placeholder.svg?height=400&width=600",
-      tech: ["Vue.js", "Node.js", "InfluxDB", "MQTT", "AWS IoT", "Python"],
-      github: "#",
-      live: "#",
-      featured: false,
-      category: "IoT",
-      type: "web",
-      duration: "14 months",
-      team: "6 Developers",
+      title: "My Tiffin Hub",
+      description: "A real-world, full-stack tiffin subscription platform with WebSocket for real-time updates, featuring three panels: user for enrollment and updates, admin for tiffin management, and superadmin for system oversight.",
+      image: "/Tiffin.png",
+      tech: ["Next.js", "PostgreSQL", "Neon", "Node.js", "Tailwind CSS", "Prisma", "WebSocket", "Nodemailer", "Razorpay", "Stripe", "Scikit-learn"],
+      github: "https://github.com/samikhan1239/my-tiffin-hub",
+      live: "https://portfolio-delta-gray-39.vercel.app/",
+      featured: true,
+      categories: ["Real World", "Full Stack", "Animated"],
+      type: "Real World, Full Stack, Frontend, Animated",
+      duration: "Apr 2025 - Aug 2025",
+      team: "Solo",
       stats: {
-        sensors: "10K+",
-        dataPoints: "1M+/day",
-        efficiency: "35%",
-        cities: "5",
-        alerts: "99.5%",
+        users: "100+ Daily",
+        uptime: "99%",
+        subscriptions: "50+ Daily",
       },
       highlights: [
-        "Real-time monitoring of 10K+ sensors",
-        "Predictive analytics for 35% efficiency gains",
-        "Support for 5 smart cities",
-        "High-reliability alerts with 99.5% uptime",
+        "Developed user panel with animated UI for daily updates and tiffin enrollment, reducing processing time by 20%.",
+        "Built admin panel for tiffin management and superadmin panel for pricing/security with JWT authentication.",
+        "Integrated WebSocket and Nodemailer for real-time updates, handling 50+ subscriptions.",
       ],
-      color: "from-teal-500 to-blue-500",
+      color: "from-emerald-500 to-teal-500",
     },
     {
       id: 6,
-      title: "Financial Trading Platform",
-      description: "High-frequency trading platform with algorithmic trading and risk management",
-      image: "/placeholder.svg?height=400&width=600",
-      tech: ["React", "Node.js", "Redis", "WebSocket", "PostgreSQL", "Python"],
-      github: "#",
-      live: "#",
+      title: "Sesai",
+      description: "A real-world, full-stack AI resume builder with animated interfaces, leveraging ML to optimize resume content for job applications.",
+      image: "/sensai1.png",
+      tech: ["Next.js", "PostgreSQL", "Node.js", "Tailwind CSS", "Prisma", "TensorFlow", "Framer Motion"],
+      github: "https://github.com/samikhan1239/sesai",
+      live: "https://sesai.vercel.app",
       featured: false,
-      category: "FinTech",
-      type: "web",
-      duration: "9 months",
-      team: "4 Developers",
+      categories: ["Full Stack", "Animated"],
+      type: "Real World, Full Stack, Frontend, Animated",
+      duration: "Jan 2025 - Mar 2025",
+      team: "Solo",
       stats: {
-        trades: "1M+",
-        latency: "<10ms",
-        volume: "$100M+",
-        users: "5K+",
-        accuracy: "99.8%",
+        users: "100+ Daily",
+        uptime: "99%",
+        resumes: "200+ Monthly",
       },
       highlights: [
-        "Sub-10ms latency for high-frequency trading",
-        "Processed $100M+ in trading volume",
-        "99.8% accuracy in algorithmic trading",
-        "Robust risk management system",
+        "Developed ML-driven resume optimization, improving job match rates by 25%.",
+        "Built animated user interface for seamless resume creation.",
+        "Integrated secure APIs with Prisma and PostgreSQL for data management.",
       ],
-      color: "from-yellow-500 to-orange-500",
+      color: "from-cyan-500 to-blue-500",
     },
-  ];
+    {
+      id: 7,
+      title: "E-commerce Electronic Store",
+      description: "A real-world, full-stack e-commerce platform for electronics, featuring animated UI and ML-driven product recommendations for enhanced user experience.",
+      image: "/stylify.png",
+      tech: ["Next.js", "PostgreSQL", "Node.js", "Tailwind CSS", "Prisma", "WebSocket", "Stripe", "TensorFlow"],
+      github: "https://github.com/samikhan1239/ecommerce-electronic",
+      live: "https://ecommerce-electronic.vercel.app",
+      featured: false,
+      categories: ["Frontend", "Full Stack", "Animated"],
+      type: "Real World, Full Stack, Frontend, Animated",
+      duration: "Sep 2025 - Nov 2025",
+      team: "Solo",
+      stats: {
+        users: "50+ Daily",
+        uptime: "99%",
+        transactions: "100+ Daily",
+      },
+      highlights: [
+        "Developed animated product catalog with ML-driven recommendations.",
+        "Integrated secure payment processing with Stripe for seamless transactions.",
+        "Built admin panel for inventory management with real-time updates via WebSocket.",
+      ],
+      color: "from-indigo-500 to-purple-500",
+    },
+    {
+      id: 8,
+      title: "DSA Visualizer",
+      description: "A frontend-focused tool with animated visualizations for data structures and algorithms, enhancing learning through interactive ML-optimized content.",
+      image: "/dsa.png",
+      tech: ["Next.js", "Vite", "Tailwind CSS", "Framer Motion", "Scikit-learn"],
+      github: "https://github.com/samikhan1239/dsa-visualizer",
+      live: "https://dsavisualizer.com",
+      featured: false,
+      categories: ["Frontend", "Animated"],
+      type: "Real World, Frontend, Animated",
+      duration: "Nov 2024 - Dec 2024",
+      team: "Solo",
+      stats: {
+        render: "50ms",
+        improvement: "35%",
+        users: "N/A",
+      },
+      highlights: [
+        "Improved algorithm comprehension by 35% with ML-optimized animated visualizations.",
+        "Achieved 50ms render times for smooth performance.",
+        "Deployed on Vercel for scalable access.",
+      ],
+      color: "from-pink-500 to-purple-500",
+    },
+    {
+  id: 9,
+  title: "Heaven Space",
+  description: "A full-stack rental platform featuring a three-panel system (Admin, Seller, User) with advanced property listing, user interaction, and admin moderation.",
+  image: "/heaven.png",
+  tech: ["Next.js 14", "MongoDB", "Tailwind CSS", "Razorpay", "Framer Motion"],
+  github: "https://github.com/samikhan1239/heaven-space",
+  live: "https://heavenspace.vercel.app",
+  featured: true,
+  categories: ["Full Stack", "Rental", "Admin Panel"],
+  type: "Real World, Full Stack, Property Management",
+  duration: "Jan 2025 - Feb 2025",
+  team: "Solo",
+  stats: {
+    render: "60ms",
+    improvement: "User interaction efficiency ↑",
+    users: "500+",
+  },
+  highlights: [
+    "Implemented a 3-panel architecture: Admin manages listings, Sellers post properties, and Users browse seamlessly.",
+    "Integrated Razorpay for secure rent payment flows.",
+    "Optimized performance with server-side rendering and dynamic route handling.",
+  ],
+  color: "from-indigo-500 to-purple-600",
+},
+  ],
+  []
+);
 
-  const projectCategories = ["all", "Full Stack", "Blockchain", "Real-time", "Healthcare", "IoT", "FinTech"];
+  // Project categories
+  const projectCategories = ["All", "Full Stack", "Real World", "Machine Learning", "Frontend", "Animated"]; // Updated to match requirements
 
-  const filteredProjects =
-    activeProjectFilter === "all" ? projects : projects.filter((project) => project.category === activeProjectFilter);
+  // Memoized filtered projects
+  const filteredProjects = useMemo(() => {
+    if (activeProjectFilter === "All") {
+      return projects;
+    } else if (activeProjectFilter === "Full Stack") {
+      return projects.filter(
+        (project) =>
+          project.categories.includes("Full Stack") &&
+          !project.categories.every((cat) => cat === "Animated" || cat === "Frontend")
+      );
+    } else if (activeProjectFilter === "Real World") {
+      const allowedTitles = ["Warsi Homeopathic Clinic", "Love Sync", "My Tiffin Hub"];
+      return projects.filter((project) => allowedTitles.includes(project.title));
+    } else if (activeProjectFilter === "Machine Learning") {
+      return projects.filter((project) => project.title === "Stay Finder");
+    } else if (activeProjectFilter === "Frontend") {
+      return projects.filter(
+        (project) =>
+          project.categories.includes("Frontend") ||
+          project.categories.includes("Animated") ||
+          project.title === "Freelancer Website"
+      );
+    } else if (activeProjectFilter === "Animated") {
+      return projects.filter(
+        (project) =>
+          project.categories.includes("Animated") || project.title === "Freelancer Website"
+      );
+    }
+    return projects.filter((project) => project.categories.includes(activeProjectFilter));
+  }, [projects, activeProjectFilter]);
 
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
@@ -729,13 +815,13 @@ export default function Portfolio() {
             <div className="space-y-4">
               <h1 className="text-7xl md:text-8xl font-black leading-none">
                 <span className="block text-transparent bg-gradient-to-r from-green-400 via-emerald-500 to-teal-400 bg-clip-text animate-gradient-x">
-                  CODE
+                 I&apos;M 
                 </span>
                 <span
                   className="block text-transparent bg-gradient-to-r from-emerald-400 via-teal-500 to-green-400 bg-clip-text animate-gradient-x"
                   style={{ animationDelay: "0.5s" }}
                 >
-                  MASTER
+            SAMI 
                 </span>
               </h1>
               <div className="h-16 flex items-center">
@@ -785,6 +871,7 @@ export default function Portfolio() {
                 onClick={() => scrollToSection("contact")}
               >
                 <Zap className="w-5 h-5 mr-2 group-hover:animate-spin" />
+         
                 Let&apos;s Connect
               </Button>
             </div>
@@ -1138,7 +1225,7 @@ export default function Portfolio() {
             © {new Date().getFullYear()} Code Master | Crafted with passion and innovation
           </p>
           <div className="text-transparent bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text font-mono">
-             Building the future, one line of code at a time
+            Building the future, one line of code at a time
           </div>
         </div>
       </footer>

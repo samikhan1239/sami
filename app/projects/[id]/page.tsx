@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState, useEffect, useRef } from "react"
@@ -22,11 +21,10 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useParams } from "next/navigation"
+
 
 export default function ProjectDetails() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const params = useParams() // Unused due to mock data; will be used for API fetching in production
+  // Used for API fetching in production
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -43,13 +41,12 @@ export default function ProjectDetails() {
       "/placeholder.svg?height=400&width=600",
       "/placeholder.svg?height=400&width=600",
       "/placeholder.svg?height=400&width=600",
-      "/placeholder.svg?height=400&width=600",
     ],
     tech: ["Next.js", "Node.js", "MongoDB", "TensorFlow.js", "Stripe", "AWS", "Redis", "Docker"],
     github: "#",
     live: "#",
     featured: true,
-    category: "Full Stack",
+    categories: ["Full Stack", "Machine Learning", "Real World"], // Updated to categories: string[]
     duration: "6 months",
     team: "Solo Project",
     client: "TechCorp Solutions",
@@ -271,9 +268,14 @@ export default function ProjectDetails() {
           {/* Project Header */}
           <div className="mb-16">
             <div className="flex items-center space-x-4 mb-6">
-              <Badge className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-300 border border-green-500/30">
-                {project.category}
-              </Badge>
+              {project.categories.map((category, index) => (
+                <Badge
+                  key={index}
+                  className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-300 border border-green-500/30"
+                >
+                  {category}
+                </Badge>
+              ))}
               <Badge className="bg-gradient-to-r from-emerald-500/20 to-teal-500/20 text-emerald-300 border border-emerald-500/30">
                 {project.status}
               </Badge>
@@ -365,7 +367,7 @@ export default function ProjectDetails() {
             </div>
 
             {/* Image Thumbnails */}
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               {project.images.map((image, index) => (
                 <button
                   key={index}
