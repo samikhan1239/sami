@@ -542,7 +542,7 @@ export default function Portfolio() {
       id: 4,
       title: "Love Sync",
       description: "A real-world, full-stack matrimonial website with admin-approved profiles and mutual connection features, ensuring privacy with ML-enhanced matching.",
-      image: "/love.png",
+      image: "/Lovesync1.png",
       tech: ["Next.js", "PostgreSQL", "Neon", "Node.js", "Tailwind CSS", "Prisma", "TensorFlow"],
       github: "https://github.com/samikhan1239/LoveSync",
       live: "https://love-sync-kappa.vercel.app/",
