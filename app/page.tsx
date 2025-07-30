@@ -464,30 +464,32 @@ export default function Portfolio() {
   const projects = useMemo(
   () => [
     {
-      id: 1,
-      title: "Freelancer Website",
-      description: "A real-world, full-stack animated platform for freelance services, connecting clients and professionals with ML-driven project recommendations and secure payments.",
-      image: "/free.png",
-      tech: ["Next.js", "PostgreSQL", "Node.js", "Tailwind CSS", "Prisma", "WebSocket", "Nodemailer", "Stripe", "TensorFlow"],
-      github: "https://github.com/samikhan1239/freelancer-website",
-      live: "https://freelancer-ecru-nine.vercel.app/",
-      featured: true,
-      categories: ["Frontend", "Animated", "Real World"], // Updated to categories
-      type: "Real World, Full Stack, Frontend, Animated",
-      duration: "Jun 2025 - Sep 2025",
-      team: "Solo",
-      stats: {
-        users: "150+ Daily",
-        uptime: "99%",
-        projects: "100+ Monthly",
-      },
-      highlights: [
-        "Developed animated client dashboard with ML-driven project recommendations.",
-        "Implemented secure payment processing with Stripe, enhancing transaction security by 15%.",
-        "Created admin panel with JWT authentication and WebSocket for real-time updates.",
-      ],
-      color: "from-green-500 to-emerald-500",
-    },
+  id: 3,
+  title: "Taylent Sync",
+  description: "A real-time freelance services marketplace inspired by Fiverr, featuring secure payments, chat system, role-based dashboards, and animated UI.",
+  image: "/talentSync.png",
+  tech: ["Next.js", "MongoDB", "Express.js", "WebSocket", "Tailwind CSS", "Razorpay", "Cloudinary"],
+  github: "https://github.com/samikhan1239/taylent-sync",
+  live: "https://fiver-mauve.vercel.app/", // Replace with your actual live URL
+  featured: true,
+  categories: ["Freelance", "Full Stack", "Real Time", "Payment Integration", "Animated"],
+  type: "Real World, Full Stack, Real Time, Animated",
+  duration: "Feb 2025 - May 2025",
+  team: "Solo",
+  stats: {
+    users: "100+ Daily",
+    messages: "Live Chat",
+    payments: "Razorpay Integrated",
+  },
+  highlights: [
+    "Implemented real-time chat using WebSocket for seamless buyer-seller communication.",
+    "Integrated Razorpay for secure payment processing and order management.",
+    "Developed role-based dashboards and protected routes using JWT authentication.",
+  ],
+  color: "from-green-500 to-emerald-500",
+},
+
+   
     {
       id: 2,
       title: "Stay Finder",
