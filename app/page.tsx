@@ -464,34 +464,82 @@ export default function Portfolio() {
   const projects = useMemo(
   () => [
     {
-  id: 3,
-  title: "Taylent Sync",
-  description: "A real-time freelance services marketplace inspired by Fiverr, featuring secure payments, chat system, role-based dashboards, and animated UI.",
-  image: "/talentSync.png",
-  tech: ["Next.js", "MongoDB", "Express.js", "WebSocket", "Tailwind CSS", "Razorpay", "Cloudinary"],
-  github: "https://github.com/samikhan1239/taylent-sync",
-  live: "https://fiver-mauve.vercel.app/", // Replace with your actual live URL
-  featured: true,
-  categories: ["Freelance", "Full Stack", "Real Time", "Payment Integration", "Animated"],
-  type: "Real World, Full Stack, Real Time, Animated",
-  duration: "Feb 2025 - May 2025",
-  team: "Solo",
-  stats: {
-    users: "100+ Daily",
-    messages: "Live Chat",
-    payments: "Razorpay Integrated",
-  },
-  highlights: [
-    "Implemented real-time chat using WebSocket for seamless buyer-seller communication.",
-    "Integrated Razorpay for secure payment processing and order management.",
-    "Developed role-based dashboards and protected routes using JWT authentication.",
-  ],
-  color: "from-green-500 to-emerald-500",
-},
-
-   
+      id: 1,
+      title: "Echo",
+      description: "AI-powered customer support platform with operator dashboard and customer widget, featuring real-time chat, voice, and escalation flows.",
+      image: "/echo.png",
+      tech: ["Next.js 15", "React 19", "Convex", "VAPI", "Clerk", "AWS", "Sentry", "Turborepo", "Tailwind v4", "shadcn/ui"],
+      github: "https://github.com/samikhan1239/echo",
+live: "https://echo-web-mauve.vercel.app/",
+      featured: true,
+      categories: ["AI", "SaaS", "Real Time", "Widget", "Web App"],
+      type: "AI, Full Stack, SaaS, Real Time",
+      duration: "Mar 2025 - Jul 2025",
+      team: "Solo",
+      stats: {
+        users: "100+ Daily",
+        uptime: "99%",
+        chats: "Live Chat",
+      },
+      highlights: [
+        "Managed real-time AI chats and calls with seamless escalation to human agents.",
+        "Implemented Knowledge Base (RAG) with contextual AI responses.",
+        "Ensured secure API key management via AWS Secrets Manager and monitored errors with Sentry.",
+      ],
+      color: "from-indigo-500 to-purple-500",
+    },
     {
       id: 2,
+      title: "Meet AI",
+      description: "AI-powered video conferencing app with real-time video and chat, AI call initiation, automated transcripts, and post-call insights.",
+      image: "/meet-ai.png",
+      tech: ["Next.js 15", "React 19", "Stream Video SDK", "Stream Chat SDK", "OpenAI", "Inngest", "Polar", "Better Auth", "Tailwind v4", "shadcn/ui"],
+      github: "https://github.com/samikhan1239/meetai",
+      live: "https://meetai-15ar.vercel.app/",
+      featured: true,
+      categories: ["AI", "Real Time", "Video Conferencing", "SaaS"],
+      type: "AI, Full Stack, SaaS, Real Time",
+      duration: "Feb 2025 - Jun 2025",
+      team: "Solo",
+      stats: {
+        users: "50+ Daily",
+        uptime: "99%",
+        meetings: "Live Video Calls",
+      },
+      highlights: [
+        "AI initiates and assists in meetings with real-time video & chat integration.",
+        "Generated transcripts, summaries, and searchable archives via Inngest.",
+        "Provided context-aware insights post-call for better meeting outcomes.",
+      ],
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      id: 3,
+      title: "Talent Sync",
+      description: "A real-time freelance services marketplace inspired by Fiverr, featuring secure payments, chat system, role-based dashboards, and animated UI.",
+      image: "/talentSync.png",
+      tech: ["Next.js", "MongoDB", "Express.js", "WebSocket", "Tailwind CSS", "Razorpay", "Cloudinary"],
+      github: "https://github.com/samikhan1239/taylent-sync",
+      live: "https://fiver-mauve.vercel.app/",
+      featured: true,
+      categories: ["Freelance", "Full Stack", "Real Time", "Payment Integration", "Animated"],
+      type: "Real World, Full Stack, Real Time, Animated",
+      duration: "Feb 2025 - May 2025",
+      team: "Solo",
+      stats: {
+        users: "100+ Daily",
+        messages: "Live Chat",
+        payments: "Razorpay Integrated",
+      },
+      highlights: [
+        "Implemented real-time chat using WebSocket for seamless buyer-seller communication.",
+        "Integrated Razorpay for secure payment processing and order management.",
+        "Developed role-based dashboards and protected routes using JWT authentication.",
+      ],
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      id: 4,
       title: "Stay Finder",
       description: "A real-world, full-stack Airbnb clone with modern itinerary planning and ML-optimized search, featuring animated UI and secure payment processing.",
       image: "/stayFinder.png",
@@ -516,9 +564,9 @@ export default function Portfolio() {
       color: "from-blue-500 to-cyan-500",
     },
     {
-      id: 3,
+      id: 5,
       title: "Warsi Homeopathic Clinic",
-      description: "A real-world, full-stack platform for appointment booking and e-learning, with animated interfaces and ML-enhanced course recommendations for 200+ patients and students.",
+      description: "A full-stack platform for appointment booking and e-learning with ML-enhanced course recommendations for 200+ patients and students.",
       image: "/clinic.png",
       tech: ["Next.js", "PostgreSQL", "Neon", "Node.js", "Tailwind CSS", "Prisma", "Cloudinary", "TensorFlow"],
       github: "https://github.com/samikhan1239/Warsi-Homeo-Clinic",
@@ -541,9 +589,9 @@ export default function Portfolio() {
       color: "from-teal-500 to-green-500",
     },
     {
-      id: 4,
+      id: 6,
       title: "Love Sync",
-      description: "A real-world, full-stack matrimonial website with admin-approved profiles and mutual connection features, ensuring privacy with ML-enhanced matching.",
+      description: "A full-stack matrimonial website with admin-approved profiles and ML-enhanced matching.",
       image: "/Lovesync1.png",
       tech: ["Next.js", "PostgreSQL", "Neon", "Node.js", "Tailwind CSS", "Prisma", "TensorFlow"],
       github: "https://github.com/samikhan1239/LoveSync",
@@ -559,16 +607,16 @@ export default function Portfolio() {
         requests: "200+ Daily",
       },
       highlights: [
-        "Enhanced privacy by 20% with ML-driven admin-approved profile matching and mutual consent.",
+        "Enhanced privacy by 20% with ML-driven admin-approved profile matching.",
         "Implemented secure RESTful APIs with JWT authentication.",
         "Achieved 99% uptime for 200+ daily API requests.",
       ],
       color: "from-purple-500 to-pink-500",
     },
     {
-      id: 5,
+      id: 7,
       title: "My Tiffin Hub",
-      description: "A real-world, full-stack tiffin subscription platform with WebSocket for real-time updates, featuring three panels: user for enrollment and updates, admin for tiffin management, and superadmin for system oversight.",
+      description: "Full-stack tiffin subscription platform with real-time updates and multiple panels (user, admin, superadmin).",
       image: "/Tiffin.png",
       tech: ["Next.js", "PostgreSQL", "Neon", "Node.js", "Tailwind CSS", "Prisma", "WebSocket", "Nodemailer", "Razorpay", "Stripe", "Scikit-learn"],
       github: "https://github.com/samikhan1239/Tiffin-Hub",
@@ -591,9 +639,9 @@ export default function Portfolio() {
       color: "from-emerald-500 to-teal-500",
     },
     {
-      id: 6,
+      id: 8,
       title: "Sesai",
-      description: "A real-world, full-stack AI resume builder with animated interfaces, leveraging ML to optimize resume content for job applications.",
+      description: "AI-powered resume builder with animated interfaces, leveraging ML to optimize resume content for job applications.",
       image: "/sensai1.png",
       tech: ["Next.js", "PostgreSQL", "Node.js", "Tailwind CSS", "Prisma", "TensorFlow", "Framer Motion"],
       github: "https://github.com/samikhan1239/Sensai",
@@ -616,9 +664,9 @@ export default function Portfolio() {
       color: "from-cyan-500 to-blue-500",
     },
     {
-      id: 7,
+      id: 9,
       title: "E-commerce Electronic Store",
-      description: "A real-world, full-stack e-commerce platform for electronics, featuring animated UI and ML-driven product recommendations for enhanced user experience.",
+      description: "Full-stack e-commerce platform for electronics, featuring animated UI and ML-driven product recommendations.",
       image: "/stylify.png",
       tech: ["Next.js", "PostgreSQL", "Node.js", "Tailwind CSS", "Prisma", "WebSocket", "Stripe", "TensorFlow"],
       github: "https://github.com/samikhan1239/ecommerce-electronic",
@@ -640,8 +688,8 @@ export default function Portfolio() {
       ],
       color: "from-indigo-500 to-purple-500",
     },
-    {
-      id: 8,
+   {
+      id: 10,
       title: "DSA Visualizer",
       description: "A frontend-focused tool with animated visualizations for data structures and algorithms, enhancing learning through interactive ML-optimized content.",
       image: "/dsa.png",
@@ -666,7 +714,7 @@ export default function Portfolio() {
       color: "from-pink-500 to-purple-500",
     },
     {
-  id: 9,
+  id: 11,
   title: "Heaven Space",
   description: "A full-stack rental platform featuring a three-panel system (Admin, Seller, User) with advanced property listing, user interaction, and admin moderation.",
   image: "/heaven.png",
@@ -691,7 +739,7 @@ export default function Portfolio() {
   color: "from-indigo-500 to-purple-600",
 },
 {
-  id: 10,
+  id: 12,
   title: "Techify",
   description: "A modern, frontend-focused e-commerce store for electronic devices with smooth animations and engaging UI built for an immersive shopping experience.",
   image: "/techify.png",
@@ -719,6 +767,7 @@ export default function Portfolio() {
   ],
   []
 );
+
 
   // Project categories
   const projectCategories = ["All", "Full Stack", "Real World", "Machine Learning", "Frontend", "Animated"]; // Updated to match requirements
